@@ -1,0 +1,16 @@
+work_order_id,customer_id,property_id,service_id,problem_description,status,urgency,request_date_time,assigned_technician_id,scheduled_date_time
+WO001,CUST001,PROP001,SVC001,AC not cooling properly in living room,Scheduled,Medium,2025-08-01T09:30:00,TECH001,2025-08-03T10:00:00
+WO002,CUST002,PROP002,SVC002,Kitchen faucet dripping continuously,Completed,Low,2025-07-30T14:20:00,TECH002,2025-08-01T09:00:00
+WO003,CUST003,PROP003,SVC003,Electrical outlet not working in bedroom,In Progress,Medium,2025-08-03T11:15:00,TECH003,2025-08-04T14:00:00
+WO004,CUST004,PROP004,SVC001,Central AC system making loud noise,New,High,2025-08-02T08:45:00,,
+WO005,CUST005,PROP005,SVC004,Emergency - Water leak in hospital corridor,Completed,Emergency,2025-07-31T15:30:00,TECH005,2025-07-31T16:00:00
+WO006,CUST006,PROP006,SVC005,Lighting fixtures flickering in office,Scheduled,Medium,2025-08-01T16:20:00,TECH007,2025-08-03T11:00:00
+WO007,CUST007,PROP007,SVC002,Bathroom sink blocked,New,Low,2025-08-02T10:15:00,,
+WO008,CUST008,PROP008,SVC001,HVAC system not responding to thermostat,Scheduled,High,2025-08-01T13:45:00,TECH004,2025-08-02T15:00:00
+WO009,CUST009,PROP009,SVC003,Power outage in apartment,Completed,High,2025-07-29T19:30:00,TECH011,2025-07-30T08:00:00
+WO010,CUST010,PROP010,SVC006,Regular cleaning service request,Scheduled,Low,2025-08-01T12:00:00,TECH009,2025-08-04T09:00:00
+WO011,CUST011,PROP011,SVC002,Shower head replacement needed,New,Low,2025-08-02T09:20:00,,
+WO012,CUST012,PROP012,SVC001,AC maintenance - annual service,Completed,Low,2025-07-28T11:00:00,TECH001,2025-07-30T10:00:00
+WO013,CUST013,PROP013,SVC005,Office lighting upgrade,In Progress,Medium,2025-08-01T14:30:00,TECH013,2025-08-02T13:00:00
+WO014,CUST014,PROP014,SVC004,Emergency - Elevator malfunction,Completed,Emergency,2025-08-01T07:15:00,TECH012,2025-08-01T08:00:00
+WO015,CUST015,PROP015,SVC003,Circuit breaker keeps tripping,New,High,2025-08-02T11:45:00,,

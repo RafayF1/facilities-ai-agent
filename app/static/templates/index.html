@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Facilities Management AI Agent</title>
+    <link href="/static/css/style.css" rel="stylesheet">
+    <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+    <script src="https://unpkg.com/htmx.org/dist/ext/ws.js"></script>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <h1>🏢 Premium Facilities Management</h1>
+                <p class="subtitle">AI-Powered Customer Service Assistant</p>
+            </div>
+            <div class="connection-status" id="connectionStatus">
+                <span class="status-indicator" id="statusIndicator">●</span>
+                <span id="statusText">Connecting...</span>
+            </div>
+        </header>
+
+        <!-- Main Chat Interface -->
+        <main class="chat-container">
+            <!-- Messages Area -->
+            <div class="messages-area" id="messagesArea">
+                <div class="welcome-message">
+                    <div class="welcome-content">
+                        <h2>👋 Welcome to Premium Facilities Management!</h2>
+                        <p>I'm your AI assistant, ready to help with:</p>
+                        <ul class="service-list">
+                            <li>🔧 HVAC & Air Conditioning Services</li>
+                            <li>🚰 Plumbing Repairs & Maintenance</li>
+                            <li>⚡ Electrical Systems & Installations</li>
+                            <li>🧹 Cleaning & General Maintenance</li>
+                            <li>🚨 Emergency Response (24/7)</li>
+                            <li>📅 Appointment Scheduling</li>
+                            <li>📋 Service Status Updates</li>
+                        </ul>
+                        <p class="start-message">
+                            You can <strong>type</strong> your message below or click the <strong>microphone</strong> to speak with me directly.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Input Area -->
+            <div class="input-area">
+                <form class="input-form" id="messageForm">
+                    <div class="input-wrapper">
+                        <input 
+                            type="text" 
+                            id="messageInput" 
+                            placeholder="Type your message here..."
+                            autocomplete="off"
+                            disabled
+                        >
+                        <button type="submit" id="sendButton" class="send-btn" disabled>
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
+                            </svg>
+                        </button>
+                    </div>
+                </form>
+                
+                <div class="voice-controls">
+                    <button id="startAudioButton" class="audio-btn" disabled>
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 14c1.66 0 2.99-1.34 2.99-3L15 5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3zm5.3-3c0 3-2.54 5.1-5.3 5.1S6.7 14 6.7 11H5c0 3.41 2.72 6.23 6 6.72V21h2v-3.28c3.28-.48 6-3.3 6-6.72h-1.7z"/>
+                        </svg>
+                        <span>Start Voice</span>
+                    </button>
+                    
+                    <div class="audio-indicator" id="audioIndicator" style="display: none;">
+                        <div class="audio-bars">
+                            <div class="bar"></div>
+                            <div class="bar"></div>
+                            <div class="bar"></div>
+                            <div class="bar"></div>
+                        </div>
+                        <span>Listening...</span>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Emergency Banner -->
+        <div class="emergency-banner" id="emergencyBanner" style="display: none;">
+            <div class="emergency-content">
+                <span class="emergency-icon">🚨</span>
+                <div class="emergency-text">
+                    <strong>Emergency Detected</strong>
+                    <p>Your request has been prioritized. Help is on the way!</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-content">
+                <div class="emergency-info">
+                    <strong>Emergency Hotline:</strong> +971-4-XXX-XXXX (24/7)
+                </div>
+                <div class="service-areas">
+                    <strong>Service Areas:</strong> Dubai Marina • JBR • Downtown • Business Bay • DIFC
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Scripts -->
+    <script type="module" src="/static/js/app.js"></script>
+    <script type="module" src="/static/js/audio-player.js"></script>
+    <script type="module" src="/static/js/audio-recorder.js"></script>
+</body>
+</html>

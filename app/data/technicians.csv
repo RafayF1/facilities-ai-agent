@@ -1,0 +1,16 @@
+technician_id,technician_name,contact_number,skillset,operating_zones,current_status
+TECH001,Ahmed Hassan,971551112233,HVAC;Plumbing;Electrical,Marina;JBR;Downtown,Available
+TECH002,Omar Al Rashid,971552223344,Plumbing;General Maintenance,Business Bay;DIFC;Downtown,Available
+TECH003,Rajesh Kumar,971553334455,Electrical;HVAC,Marina;JBR;Al Barsha,Available
+TECH004,Mohammed Ali,971554445566,HVAC;General Maintenance,Downtown;Business Bay;DIFC,On Job
+TECH005,Hassan Al Maktoum,971555556677,Plumbing;Electrical,Al Barsha;Marina;JBR,Available
+TECH006,Carlos Santos,971556667788,HVAC;Plumbing,Business Bay;DIFC;Downtown,Available
+TECH007,Pradeep Singh,971557778899,Electrical;General Maintenance,Marina;Al Barsha;JBR,Available
+TECH008,Khalil Al Zahra,971558889900,HVAC;Electrical;Plumbing,Downtown;Business Bay;Marina,Available
+TECH009,James Wilson,971559990011,General Maintenance;Plumbing,DIFC;Al Barsha;JBR,On Job
+TECH010,Youssef Ibrahim,971550001122,HVAC;General Maintenance,Marina;Downtown;Business Bay,Available
+TECH011,Ravi Patel,971551112244,Electrical;HVAC,JBR;Al Barsha;DIFC,Available
+TECH012,Ali Al Mansoori,971552223355,Plumbing;General Maintenance,Business Bay;Marina;Downtown,Available
+TECH013,Fernando Lopez,971553334466,HVAC;Electrical,Al Barsha;DIFC;JBR,Available
+TECH014,Saeed Al Shamsi,971554445577,General Maintenance;Plumbing,Marina;Business Bay;Al Barsha,On Job
+TECH015,David Kim,971555556688,Electrical;HVAC;Plumbing,Downtown;JBR;DIFC,Available

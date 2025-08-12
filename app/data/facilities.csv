@@ -1,0 +1,16 @@
+property_id,customer_id,building_name,unit_number,floor,full_address,city,emirate,area_zone,property_type
+PROP001,CUST001,Marina Heights Tower 1,1205,12,Marina Heights Tower 1 Dubai Marina,Dubai,Dubai,Marina,Residential
+PROP002,CUST002,Business Central,501,5,Business Central Sheikh Zayed Road,Dubai,Dubai,Business Bay,Commercial
+PROP003,CUST003,Downtown Views,1504,15,Downtown Views Tower Downtown Dubai,Dubai,Dubai,Downtown,Residential
+PROP004,CUST004,JBR Sadaf,807,8,Sadaf Tower JBR Dubai,Dubai,Dubai,JBR,Residential
+PROP005,CUST005,Emirates Hospital,201,2,Emirates Hospital Al Barsha,Dubai,Dubai,Al Barsha,Hospital
+PROP006,CUST006,DIFC Gate,1102,11,DIFC Gate Building DIFC,Dubai,Dubai,DIFC,Commercial
+PROP007,CUST007,Marina Walk,3008,30,Marina Walk Tower Dubai Marina,Dubai,Dubai,Marina,Residential
+PROP008,CUST008,Business Bay Executive,920,9,Executive Towers Business Bay,Dubai,Dubai,Business Bay,Commercial
+PROP009,CUST009,Al Barsha Heights,1401,14,Al Barsha Heights Tower Al Barsha,Dubai,Dubai,Al Barsha,Residential
+PROP010,CUST010,JBR Murjan,605,6,Murjan Tower JBR Dubai,Dubai,Dubai,JBR,Residential
+PROP011,CUST011,Downtown Boulevard,2203,22,Boulevard Point Downtown Dubai,Dubai,Dubai,Downtown,Residential
+PROP012,CUST012,Marina Pinnacle,1807,18,Marina Pinnacle Tower Dubai Marina,Dubai,Dubai,Marina,Residential
+PROP013,CUST013,DIFC Liberty House,901,9,Liberty House DIFC Dubai,Dubai,Dubai,DIFC,Commercial
+PROP014,CUST014,Al Barsha Medical,301,3,Al Barsha Medical Center Al Barsha,Dubai,Dubai,Al Barsha,Hospital
+PROP015,CUST015,Business Bay Central,1506,15,Central Park Towers Business Bay,Dubai,Dubai,Business Bay,Commercial
