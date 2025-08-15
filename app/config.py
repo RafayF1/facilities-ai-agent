@@ -36,7 +36,7 @@ class Settings(BaseSettings):
     templates_dir: Path = static_dir / "templates"
     
     # Business configuration
-    company_name: str = "Premium Facilities Management LLC"
+    company_name: str = os.getenv("COMPANY_NAME", "Premium Facilities Management LLC")
     emergency_keywords: list[str] = [
         "emergency", "urgent", "leak", "fire", "flood", "gas", "electrical", 
         "water", "burst", "overflow", "dangerous", "safety", "help"
