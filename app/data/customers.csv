@@ -1,16 +1,16 @@
 customer_id,full_name,phone_number,email_address,preferred_language,account_status
-CUST001,John Smith,971501234567,john.smith@emirates.net.ae,English,Active
-CUST002,Sarah Ahmed,971509876543,sarah.ahmed@etisalat.ae,English,Active
-CUST003,Mohammed Al Rashid,971507654321,mohammed.alrashid@du.ae,Arabic,Active
-CUST004,Rafay Farhan,9713225430399,rafayfarhan@gmail.com,English,Active
-CUST005,Ahmed Hassan,971508765432,ahmed.hassan@outlook.com,Arabic,Active
-CUST006,Lisa Chen,971503456789,lisa.chen@yahoo.com,English,Active
-CUST007,Omar Khalil,971504567890,omar.khalil@hotmail.com,Arabic,Active
-CUST008,Jennifer Wilson,971505678901,jennifer.wilson@gmail.com,English,Active
-CUST009,Hassan Al Maktoum,971506789012,hassan.almaktoum@emirates.net.ae,Arabic,Active
-CUST010,Maria Rodriguez,971507890123,maria.rodriguez@etisalat.ae,English,Active
-CUST011,Khalid Al Zahra,971508901234,khalid.alzahra@du.ae,Arabic,Active
-CUST012,Anna Thompson,971509012345,anna.thompson@gmail.com,English,Active
-CUST013,Rashid Al Mansoori,971500123456,rashid.almansoori@outlook.com,Arabic,Active
-CUST014,Sophie Martin,971501234568,sophie.martin@yahoo.com,English,Active
-CUST015,Abdullah Al Shamsi,971502345679,abdullah.alshamsi@emirates.net.ae,Arabic,Active
+CUST001,John Smith,971501234567,demosdreamai@gmail.com,English,Active
+CUST002,Sarah Ahmed,971509876543,demosdreamai@gmail.com,English,Active
+CUST003,Mohammed Al Rashid,971507654321,demosdreamai@gmail.com,Arabic,Active
+CUST004,Rafay Farhan,9713225430399,demosdreamai@gmail.com,English,Active
+CUST005,Ahmed Hassan,971508765432,demosdreamai@gmail.com,Arabic,Active
+CUST006,Lisa Chen,971503456789,demosdreamai@gmail.com,English,Active
+CUST007,Omar Khalil,971504567890,demosdreamai@gmail.com,Arabic,Active
+CUST008,Jennifer Wilson,971505678901,demosdreamai@gmail.com,English,Active
+CUST009,Hassan Al Maktoum,971506789012,demosdreamai@gmail.com,Arabic,Active
+CUST010,Maria Rodriguez,971507890123,demosdreamai@gmail.com,English,Active
+CUST011,Khalid Al Zahra,971508901234,demosdreamai@gmail.com,Arabic,Active
+CUST012,Anna Thompson,971509012345,demosdreamai@gmail.com,English,Active
+CUST013,Rashid Al Mansoori,971500123456,demosdreamai@gmail.com,Arabic,Active
+CUST014,Sophie Martin,971501234568,demosdreamai@gmail.com,English,Active
+CUST015,Abdullah Al Shamsi,971502345679,demosdreamai@gmail.com,Arabic,Active
