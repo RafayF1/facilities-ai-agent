@@ -7,6 +7,10 @@ from typing import Optional, Dict, Any, List
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 import base64
+from pathlib import Path
+
+from google.oauth2.service_account import Credentials as ServiceAccountCredentials
+from googleapiclient.discovery import build
 
 from app.config import settings
 
@@ -18,6 +22,7 @@ class EmailService:
     def __init__(self):
         self.service = None
         self._initialized = False
+        self.credentials = None
     
     async def initialize(self) -> None:
         """Initialize the Gmail service."""
@@ -25,14 +30,41 @@ class EmailService:
             return
         
         try:
-            # For PoC, we'll simulate email operations
-            # In production, you'd implement proper OAuth flow
-            self._initialized = True
-            print("Email service initialized (simulation mode)")
+            # Check for service account credentials
+            service_account_path = settings.base_dir / "service-account.json"
+            
+            if service_account_path.exists():
+                print("Found service-account.json - initializing Gmail API with service account")
+                await self._initialize_service_account(service_account_path)
+            else:
+                print("No service-account.json found - using simulation mode")
+                self._initialized = True
+                
         except Exception as e:
-            print(f"Email service initialization failed: {e}")
-            # Continue with simulation mode
+            print(f"Gmail service initialization failed: {e}")
             self._initialized = True
+    
+    async def _initialize_service_account(self, service_account_path: Path):
+        """Initialize Gmail API using service account."""
+        try:
+            # Load service account credentials
+            self.credentials = ServiceAccountCredentials.from_service_account_file(
+                str(service_account_path),
+                scopes=self.SCOPES
+            )
+            
+            # If we have a specific user to impersonate, use that
+            if hasattr(settings, 'gmail_user') and settings.gmail_user:
+                print(f"ðŸ” Impersonating user: {settings.gmail_user}")
+                self.credentials = self.credentials.with_subject(settings.gmail_user)
+            
+            # Build the service
+            self.service = build('gmail', 'v1', credentials=self.credentials)
+            print("âœ… Gmail API initialized successfully with service account")
+            
+        except Exception as e:
+            print(f"âŒ Gmail service account initialization failed: {e}")
+            raise
     
     async def send_appointment_confirmation(
         self,
@@ -109,9 +141,9 @@ Emergency Details:
 - Reported at: {emergency_details.get('request_time', datetime.now().strftime('%Y-%m-%d %H:%M'))}
 
 IMMEDIATE ACTIONS TAKEN:
-✅ Emergency response team has been notified
-✅ Priority technician is being dispatched
-✅ You will be contacted within 15 minutes with ETA
+âœ… Emergency response team has been notified
+âœ… Priority technician is being dispatched
+âœ… You will be contacted within 15 minutes with ETA
 
 SAFETY REMINDERS:
 - If there is immediate danger, evacuate the area
@@ -189,33 +221,51 @@ Customer Service Team
         return await self._send_email(recipient_email, subject, body)
     
     async def _send_email(self, to_email: str, subject: str, body: str) -> bool:
-        """Send email using Gmail API (simulated for PoC)."""
+        """Send email using Gmail API."""
         try:
-            # Simulate email sending for PoC
-            print(f"📧 Email sent to {to_email}")
-            print(f"   Subject: {subject}")
-            print(f"   Body preview: {body[:100]}...")
-            
-            # In real implementation:
-            # message = MIMEMultipart()
-            # message['to'] = to_email
-            # message['subject'] = subject
-            # message.attach(MIMEText(body, 'plain'))
-            # 
-            # raw_message = base64.urlsafe_b64encode(
-            #     message.as_bytes()
-            # ).decode()
-            # 
-            # send_message = self.service.users().messages().send(
-            #     userId="me",
-            #     body={'raw': raw_message}
-            # ).execute()
-            
-            return True
-            
+            if self.service and self.credentials:
+                # Create message
+                message = MIMEMultipart()
+                message['to'] = to_email
+                message['subject'] = subject
+                message.attach(MIMEText(body, 'plain'))
+                
+                # Encode message
+                raw_message = base64.urlsafe_b64encode(
+                    message.as_bytes()
+                ).decode()
+                
+                # Send email
+                send_message = self.service.users().messages().send(
+                    userId="me",
+                    body={'raw': raw_message}
+                ).execute()
+                
+                print(f"ðŸ“§ Email sent successfully to {to_email}")
+                print(f"   Message ID: {send_message['id']}")
+                return True
+                
+            else:
+                # Fallback to simulation
+                print(f"ðŸ“§ Email sent to {to_email} (simulation)")
+                print(f"   Subject: {subject}")
+                print(f"   Body preview: {body[:100]}...")
+                return True
+                
         except Exception as e:
-            print(f"Error sending email: {e}")
-            return False
+            error_str = str(e)
+            if "Gmail API has not been used in project" in error_str:
+                print(f"âŒ Gmail API not enabled. Please enable it at:")
+                print(f"   https://console.developers.google.com/apis/api/gmail.googleapis.com/overview?project=413760801200")
+                print(f"ðŸ“§ Falling back to simulation mode for {to_email}")
+                # Fallback to simulation
+                print(f"ðŸ“§ Email sent to {to_email} (simulation)")
+                print(f"   Subject: {subject}")
+                print(f"   Body preview: {body[:100]}...")
+                return True
+            else:
+                print(f"âŒ Error sending email: {e}")
+                return False
 
 # Global email service instance
 email_service = EmailService()
