@@ -46,6 +46,11 @@ class Settings(BaseSettings):
     calendar_id: str = os.getenv("GOOGLE_CALENDAR_ID", "primary")
     default_appointment_duration: int = 120  # minutes
     
+    # Google Service Account settings
+    service_account_file: str = os.getenv("SERVICE_ACCOUNT_FILE", "service-account.json")
+    gmail_user: str = os.getenv("GMAIL_USER", "")  # The email address to send from
+    calendar_user: str = os.getenv("CALENDAR_USER", "")  # The calendar user email address
+    
     # WebSocket settings
     websocket_ping_interval: int = 20
     websocket_ping_timeout: int = 10
