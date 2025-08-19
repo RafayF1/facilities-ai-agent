@@ -115,7 +115,7 @@ Customer Service Team
 {settings.company_name}
         """.strip()
         
-        return await self._send_email(recipient_email, subject, body, to_name=customer_name, from_name="Umar Murtaza")
+        return await self._send_email(recipient_email, subject, body, to_name=customer_name, from_name="Scheduling Team")
     
     async def send_service_provider_notification(
         self,
