@@ -30,9 +30,9 @@ class Settings(BaseSettings):
     emergency_model: str = os.getenv("EMERGENCY_MODEL", "gemini-2.0-flash-live-001")  # Changed to Live API model
     
     # File paths
-    base_dir: Path = Path(__file__).parent
-    data_dir: Path = base_dir / "data"
-    static_dir: Path = base_dir / "static"
+    base_dir: Path = Path(__file__).parent.parent  # Points to root folder
+    data_dir: Path = base_dir / "app" / "data"
+    static_dir: Path = base_dir / "app" / "static"
     templates_dir: Path = static_dir / "templates"
     
     # Business configuration

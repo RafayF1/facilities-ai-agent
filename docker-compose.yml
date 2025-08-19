@@ -8,16 +8,7 @@ services:
     env_file:
       - .env
     environment:
-      # Override specific environment variables if needed
       - PYTHONPATH=/app
-      - GOOGLE_APPLICATION_CREDENTIALS=/app/credentials.json
-    volumes:
-      # Mount data directory for CSV files (persists between restarts)
-      - ./app/data:/app/app/data
-      # Mount credentials file (read-only)
-      - ./credentials.json:/app/credentials.json:ro
-      # Mount token.pickle if it exists (for Google auth persistence)
-      - ./app/token.pickle:/app/app/token.pickle
     restart: unless-stopped
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8000/health"]

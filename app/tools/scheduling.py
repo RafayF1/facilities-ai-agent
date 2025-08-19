@@ -9,6 +9,7 @@ from app.services.data_service import data_service
 from app.services.calendar_service import calendar_service
 from app.services.email_service import email_service
 from app.models import WorkOrder, WorkOrderStatus, UrgencyLevel
+from app.config import settings
 
 async def check_technician_availability(
     service_type: str,
@@ -410,7 +411,7 @@ async def book_appointment(
         # Save work order
         await data_service.create_work_order(work_order)
         
-        # Create calendar appointment
+        # Create calendar appointment (company calendar only - no customer invite)
         appointment_title = f"{service.service_name} - {customer.full_name}"
         appointment_description = f"""
 Work Order: {work_order_id}
@@ -424,7 +425,7 @@ Urgency: {urgency_level.value}
 Scheduled: {scheduled_dt.strftime('%A, %B %d, %Y at %I:%M %p')}
         """.strip()
         
-        print(f"📅 Creating calendar appointment...")
+        print(f"📅 Creating calendar appointment (company calendar only)...")
         
         try:
             calendar_event = await calendar_service.create_appointment(
@@ -433,7 +434,7 @@ Scheduled: {scheduled_dt.strftime('%A, %B %d, %Y at %I:%M %p')}
                 start_time=scheduled_dt,
                 duration_minutes=service.estimated_duration,
                 location=facility.full_address,
-                attendee_emails=[customer.email_address]
+                attendee_emails=[]  # No customer invite - company calendar only
             )
             print(f"✅ Calendar event created: {calendar_event['event_id']}")
         except Exception as cal_error:
@@ -451,12 +452,24 @@ Scheduled: {scheduled_dt.strftime('%A, %B %d, %Y at %I:%M %p')}
         }
         
         try:
+            # Send confirmation email to customer
             await email_service.send_appointment_confirmation(
                 recipient_email=customer.email_address,
                 customer_name=customer.full_name,
                 appointment_details=appointment_details
             )
             print(f"📧 Confirmation email sent to: {customer.email_address}")
+            
+            # Send notification email to service provider (technician)
+            service_provider_email = settings.gmail_user if settings.gmail_user else "support@premiumfacilitiesmanagementllc.com"
+            await email_service.send_service_provider_notification(
+                recipient_email=service_provider_email,
+                technician_name=technician.technician_name,
+                appointment_details=appointment_details,
+                customer_name=customer.full_name
+            )
+            print(f"📧 Service provider notification sent to: {service_provider_email}")
+            
             email_sent = True
         except Exception as email_error:
             print(f"⚠️ Email sending failed: {email_error}")

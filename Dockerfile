@@ -30,10 +30,10 @@ COPY . .
 # Install the project itself
 RUN uv sync --frozen
 
-# Create a non-root user for security
-RUN useradd --create-home --shell /bin/bash appuser && \
-    chown -R appuser:appuser /app
-USER appuser
+# # Create a non-root user for security
+# RUN useradd --create-home --shell /bin/bash appuser && \
+#     chown -R appuser:appuser /app
+# USER appuser
 
 # Expose the port (adjust if your app uses a different port)
 EXPOSE 8000

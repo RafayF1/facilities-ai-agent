@@ -34,10 +34,10 @@ class EmailService:
             service_account_path = settings.base_dir / "service-account.json"
             
             if service_account_path.exists():
-                print("Found service-account.json - initializing Gmail API with service account")
+                print("Found service-account.json in root folder - initializing Gmail API with service account")
                 await self._initialize_service_account(service_account_path)
             else:
-                print("No service-account.json found - using simulation mode")
+                print("No service-account.json found in root folder - using simulation mode")
                 self._initialized = True
                 
         except Exception as e:
@@ -115,7 +115,54 @@ Customer Service Team
 {settings.company_name}
         """.strip()
         
-        return await self._send_email(recipient_email, subject, body)
+        return await self._send_email(recipient_email, subject, body, to_name=customer_name, from_name="Umar Murtaza")
+    
+    async def send_service_provider_notification(
+        self,
+        recipient_email: str,
+        technician_name: str,
+        appointment_details: Dict[str, Any],
+        customer_name: str
+    ) -> bool:
+        """
+        Send service provider notification email.
+        
+        Args:
+            recipient_email: Service provider email address
+            technician_name: Name of the assigned technician
+            appointment_details: Dictionary with appointment info
+            customer_name: Customer name
+            
+        Returns:
+            Success status
+        """
+        await self.initialize()
+        
+        subject = f"New Service Appointment Assigned - {settings.company_name}"
+        
+        body = f"""
+Dear {technician_name},
+
+You have been assigned a new service appointment with {settings.company_name}.
+
+Appointment Details:
+- Service: {appointment_details.get('service_type', 'N/A')}
+- Date & Time: {appointment_details.get('scheduled_time', 'N/A')}
+- Location: {appointment_details.get('location', 'N/A')}
+- Customer: {customer_name}
+- Work Order ID: {appointment_details.get('work_order_id', 'N/A')}
+- Estimated Duration: {appointment_details.get('estimated_duration', 'N/A')}
+
+Please review the work order details and ensure you have all necessary tools and parts before arrival.
+
+If you have any questions or need to reschedule, please contact the scheduling team immediately.
+
+Best regards,
+Scheduling Team
+{settings.company_name}
+        """.strip()
+        
+        return await self._send_email(recipient_email, subject, body, to_name=technician_name, from_name="Scheduling Team")
     
     async def send_emergency_notification(
         self,
@@ -157,7 +204,7 @@ A technician will contact you shortly with their estimated arrival time.
 {settings.company_name} Emergency Response Team
         """.strip()
         
-        return await self._send_email(recipient_email, subject, body)
+        return await self._send_email(recipient_email, subject, body, to_name=customer_name, from_name="Emergency Team")
     
     async def send_work_order_status_update(
         self,
@@ -218,15 +265,25 @@ Customer Service Team
 {settings.company_name}
         """.strip()
         
-        return await self._send_email(recipient_email, subject, body)
+        return await self._send_email(recipient_email, subject, body, to_name=customer_name, from_name="Customer Service Team")
     
-    async def _send_email(self, to_email: str, subject: str, body: str) -> bool:
+    async def _send_email(self, to_email: str, subject: str, body: str, to_name: str = None, from_name: str = None) -> bool:
         """Send email using Gmail API."""
         try:
             if self.service and self.credentials:
                 # Create message
                 message = MIMEMultipart()
-                message['to'] = to_email
+                
+                # Format recipient with name if provided
+                if to_name:
+                    message['to'] = f'"{to_name}" <{to_email}>'
+                else:
+                    message['to'] = to_email
+                
+                # Format sender with name if provided
+                if from_name:
+                    message['from'] = f'"{from_name}" <{settings.gmail_user if settings.gmail_user else "noreply@premiumfacilitiesmanagementllc.com"}>'
+                
                 message['subject'] = subject
                 message.attach(MIMEText(body, 'plain'))
                 
@@ -241,13 +298,13 @@ Customer Service Team
                     body={'raw': raw_message}
                 ).execute()
                 
-                print(f"ðŸ“§ Email sent successfully to {to_email}")
+                print(f"📧 Email sent successfully to {to_email}")
                 print(f"   Message ID: {send_message['id']}")
                 return True
                 
             else:
                 # Fallback to simulation
-                print(f"ðŸ“§ Email sent to {to_email} (simulation)")
+                print(f"📧 Email sent to {to_email} (simulation)")
                 print(f"   Subject: {subject}")
                 print(f"   Body preview: {body[:100]}...")
                 return True
@@ -257,9 +314,9 @@ Customer Service Team
             if "Gmail API has not been used in project" in error_str:
                 print(f"âŒ Gmail API not enabled. Please enable it at:")
                 print(f"   https://console.developers.google.com/apis/api/gmail.googleapis.com/overview?project=413760801200")
-                print(f"ðŸ“§ Falling back to simulation mode for {to_email}")
+                print(f"📧 Falling back to simulation mode for {to_email}")
                 # Fallback to simulation
-                print(f"ðŸ“§ Email sent to {to_email} (simulation)")
+                print(f"📧 Email sent to {to_email} (simulation)")
                 print(f"   Subject: {subject}")
                 print(f"   Body preview: {body[:100]}...")
                 return True

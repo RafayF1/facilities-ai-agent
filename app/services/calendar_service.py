@@ -39,15 +39,15 @@ class CalendarService:
             service_account_path = settings.base_dir / "service-account.json"
             
             if service_account_path.exists():
-                print("Found service-account.json - using service account authentication")
+                print("Found service-account.json in root folder - using service account authentication")
                 await self._initialize_service_account(service_account_path)
             else:
-                print("No service-account.json found - using simulation mode")
+                print("No service-account.json found in root folder - using simulation mode")
                 print("To enable real Google Calendar integration:")
                 print("1. Go to Google Cloud Console")
                 print("2. Enable Calendar API")
                 print("3. Create a service account")
-                print("4. Download service-account.json to app/ folder")
+                print("4. Download service-account.json to root folder")
                 self.use_real_api = False
             
             self._initialized = True
