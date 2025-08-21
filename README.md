@@ -47,16 +47,16 @@ A **voice-enabled customer service AI agent** for facilities management that han
    ```
 
 3. **Add your credentials**
-   - Place your `credentials.json` file in the project root
+   - Place your `service-account.json` file in the project root
    - Ensure you have the required Google Cloud APIs enabled
 
 4. **Build and run**
    ```bash
-   docker-compose up --build
+   docker compose up --build
    ```
 
 5. **Access the application**
-   - Open http://localhost:8000 in your browser
+   - Open http://localhost:8000 in your browser (use the port number defined in .env file)
    - Click "Start Call" to begin voice conversation
 
 ## 🔧 Development Setup
@@ -76,7 +76,7 @@ uv run python -m app.main
 ### Hot Reload Development with Docker
 ```bash
 # Use development compose file
-docker-compose -f docker-compose.yml -f docker-compose.dev.yml up
+docker compose -f docker-compose.yml -f docker-compose.dev.yml up
 ```
 
 ## 🗂️ Project Structure
@@ -111,7 +111,7 @@ facilities-ai-agent/
    - Calendar API
    - Gmail API
    - Cloud Speech-to-Text API (if using)
-3. Create a service account and download `credentials.json`
+3. Create a service account and download `service-account.json`
 4. Place in project root
 
 ### Email Configuration (if using Gmail integration)
@@ -128,7 +128,7 @@ Copy `.env.example` to `.env` and configure:
 GEMINI_API_KEY=your_gemini_api_key_here
 
 # Google Cloud
-GOOGLE_APPLICATION_CREDENTIALS=/app/credentials.json
+GOOGLE_APPLICATION_CREDENTIALS=/app/service-account.json
 
 # Email (optional)
 EMAIL_USER=your_email@gmail.com
@@ -162,7 +162,7 @@ ports:
 **Permission errors:**
 ```bash
 # Ensure credentials file is readable
-chmod 644 credentials.json
+chmod 644 service-account.json
 ```
 
 **Audio issues:**
@@ -173,18 +173,18 @@ chmod 644 credentials.json
 ### Debugging
 ```bash
 # View container logs
-docker-compose logs -f facilities-ai-agent
+docker compose logs -f facilities-ai-agent
 
 # Access container shell
-docker-compose exec facilities-ai-agent bash
+docker compose exec facilities-ai-agent bash
 
 # Check service status
-docker-compose ps
+docker compose ps
 ```
 
 ## 🔒 Security Notes
 
-- **Never commit** `.env` files or `credentials.json`
+- **Never commit** `.env` files or `service-account.json`
 - Use environment-specific credentials for different deployments
 - Regularly rotate API keys
 - Monitor API usage and set appropriate limits
