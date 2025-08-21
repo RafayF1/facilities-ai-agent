@@ -103,7 +103,7 @@ async def root():
         <div class="status">
             <h2>System Status</h2>
             <p>✅ API Server is running</p>
-            <p>📍 WebSocket endpoint: <code>ws://localhost:8000/ws/{session_id}</code></p>
+            <p>📍 WebSocket endpoint: <code>ws://localhost:{settings.port}/ws/{session_id}</code></p>
             <p>📝 Frontend interface is being prepared...</p>
         </div>
         <h2>Available Endpoints</h2>
